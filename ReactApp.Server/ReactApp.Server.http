@@ -3,4 +3,17 @@
 GET {{ReactApp.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
+###register api test
+POST {{ReactApp.Server_HostAddress}}/Account/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "UserName": "Admin",
+    "Email": "Admin",
+    "Password": "Admin@123"
+}
+
 ###
+
+
