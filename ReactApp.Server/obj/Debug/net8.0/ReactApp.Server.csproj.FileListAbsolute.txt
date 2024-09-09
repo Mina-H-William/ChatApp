@@ -140,3 +140,5 @@ D:\Csharp\ReactApp\ReactApp.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\Syst
 D:\Csharp\ReactApp\ReactApp.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Csharp\ReactApp\ReactApp.Server\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Csharp\ReactApp\ReactApp.Server\obj\Debug\net8.0\ReactApp.Server.sourcelink.json
+D:\Csharp\ReactApp\ReactApp.Server\bin\Debug\net8.0\Castle.Core.dll
+D:\Csharp\ReactApp\ReactApp.Server\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll

@@ -35,7 +35,7 @@ namespace ReactApp.Server.Controllers
             {
             new Claim(JwtRegisteredClaimNames.Sub, userId),
             new Claim(JwtRegisteredClaimNames.UniqueName, userName),
-            new Claim(JwtRegisteredClaimNames.Email, email), // Add email claim
+            new Claim(JwtRegisteredClaimNames.Email, email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
@@ -48,7 +48,7 @@ namespace ReactApp.Server.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Resgister([FromBody] RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace ReactApp.Server.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] loginViewModel model)
         {
             if (!ModelState.IsValid)

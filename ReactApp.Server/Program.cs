@@ -20,20 +20,17 @@ namespace ReactApp.Server
 
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .UseLazyLoadingProxies()
+                .EnableSensitiveDataLogging(false)  // Disables sensitive data logging
+                .UseLoggerFactory(LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Warning))));
+
 
             // Add Identity services
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddDistributedMemoryCache(); // Required for session to work
-
-            builder.Services.AddSession(options =>
-            {
-                options.Cookie.HttpOnly = true; // Make the session cookie accessible only to the server
-                options.Cookie.IsEssential = true; // Make the session cookie essential
-            });
 
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -54,16 +51,23 @@ namespace ReactApp.Server
 
             builder.Services.AddAuthorization();
 
-            builder.Services.AddAuthentication();
+            builder.Services.AddDistributedMemoryCache(); // Required for session to work
 
-
-            builder.Services.AddControllers();
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true; // Make the session cookie accessible only to the server
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
 
             builder.Services.AddSignalR();
 
+            builder.Services.AddControllers();
+
+            builder.Services.AddSingleton<UserConnectionManager>();
 
 
             var app = builder.Build();
+
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -72,11 +76,11 @@ namespace ReactApp.Server
 
             app.UseHttpsRedirection();
 
+            app.UseSession();
+
             app.UseAuthentication();
 
-            app.UseAuthorization();
-
-            app.UseSession();
+            app.UseAuthorization(); 
 
             app.MapControllers();
 
