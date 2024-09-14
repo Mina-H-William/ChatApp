@@ -86,7 +86,7 @@ namespace ReactApp.Server
 
             app.MapFallbackToFile("/index.html");
 
-            app.MapHub<ChatHub>("/Chat");
+            app.MapHub<ChatHub>("/chathub");
 
             app.Run();
         }
